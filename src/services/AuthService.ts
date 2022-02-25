@@ -27,7 +27,7 @@ class AuthService {
       });
 
       if (prevUsers.length > 0)
-        return next(new ApiError(400, "User with email already exists"));
+        return next(new ApiError(422, "User with email already exists"));
       await this.userRepository.create({
         email,
         password,
@@ -55,21 +55,19 @@ class AuthService {
     const { email, password } = req.body;
 
     try {
-      const users = (await this.userRepository.findAll({
+      const user: UserInstance | null = await this.userRepository.findOne({
         attributes: ["id", "email", "password"],
         where: {
           email
         }
-      })) as UserInstance[];
+      });
 
-      if (users.length === 0) return next(new ApiError(404, "User not found"));
+      if (user === null) return next(new ApiError(422, "User not found"));
 
-      const isValidPassword = checkValidity(users[0].password, password);
+      if (!checkValidity(password, user.password))
+        return next(new ApiError(401, "Invalid email or password"));
 
-      if (!isValidPassword)
-        return next(new ApiError(400, "Invalid email or password"));
-
-      const accessToken = createAccessToken(users[0].id);
+      const accessToken = createAccessToken(user.id);
       return successResponse(res, 200, "User login successful", {
         accessToken
       });

@@ -7,7 +7,7 @@ interface UserAttributes {
   firstName: string;
   lastName: string;
   password: string;
-  role: "user" | "admin";
+  role: string;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
@@ -40,7 +40,6 @@ const UserModel = sequelize.define<UserInstance>("users", {
   },
   role: {
     type: DataTypes.ENUM,
-    allowNull: false,
     values: ["user", "admin"],
     defaultValue: "user"
   }

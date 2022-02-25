@@ -1,7 +1,8 @@
 import { FindOptions, Model, BuildOptions } from "sequelize";
 
 export interface IRepository<T> {
-  findAll(filter: FindOptions<T>): Promise<T[]>;
+  findAll(filter: FindOptions<T>): Promise<any>;
+  findOne(filter: FindOptions<T>): Promise<any> | null;
 }
 
 export type ModelStatic<DataType> = typeof Model &
@@ -15,6 +16,10 @@ class Repository<DataType> {
 
   findAll = async (filter: FindOptions<DataType>): Promise<any> => {
     const data = await this.model.findAll(filter);
+    return data;
+  };
+  findOne = async (filter: FindOptions<DataType>): Promise<any> => {
+    const data = await this.model.findOne(filter);
     return data;
   };
 }
