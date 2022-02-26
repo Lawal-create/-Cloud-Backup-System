@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from "express";
-import { UserInstance } from "../../models/User";
+import { UserAttributes } from "../../models/User";
 import { role } from "../../types/global";
 import ApiError from "../../errorHandler/ApiError";
 
-export const requiresAdminOrClient = (
+export const requiresAdmin = (
   type: role | role[]
 ): ((req: Request, res: Response, next: NextFunction) => void) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       //extract user data gotten from requiresSignIn middleware
-      const user: UserInstance = req.body.user || res.locals.user;
+      const user: UserAttributes = req.body.user || res.locals.user;
 
       if (user) {
         //check if user type matches type/types specified
@@ -27,4 +27,4 @@ export const requiresAdminOrClient = (
   };
 };
 
-export default requiresAdminOrClient;
+export default requiresAdmin;

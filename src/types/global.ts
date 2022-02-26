@@ -13,4 +13,4 @@ export interface JWTData extends JwtPayload {
   _id: string;
 }
 
-export type role = "admin" | "user";
+export type role = "admin" | "user" | string;
