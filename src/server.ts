@@ -3,6 +3,7 @@ import app from "./app";
 import config from "./env.config";
 import logger from "./utils/logger";
 import { connectToDB } from "./database/connect";
+import cronJobs from "./cronJobs";
 
 const { port, nodeEnv } = config;
 
@@ -24,3 +25,4 @@ const startServer = async (): Promise<void> => {
 };
 
 startServer();
+cronJobs.start();
