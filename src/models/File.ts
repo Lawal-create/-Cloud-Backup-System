@@ -11,7 +11,8 @@ interface FileAttributes {
   userId: number;
 }
 
-interface FileCreationAttributes extends Optional<FileAttributes, "id"> {}
+export interface FileCreationAttributes
+  extends Optional<FileAttributes, "id"> {}
 
 export interface FileInstance
   extends Model<FileAttributes, FileCreationAttributes>,
