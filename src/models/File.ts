@@ -11,6 +11,10 @@ interface FileAttributes {
   userId: number;
 }
 
+export interface FileQuery {
+  keys: string[];
+}
+
 export interface FileCreationAttributes
   extends Optional<FileAttributes, "id"> {}
 
