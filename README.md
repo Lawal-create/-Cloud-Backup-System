@@ -20,7 +20,8 @@ An API that serves as an cloud backup system
 - NodeJs (TypeScript & Express)
 - Postgres for pure data
 - Postman
-- S3
+- AWS S3
+- AWS EC2
 
 ## Functionalities
 - Users can create an account with:
