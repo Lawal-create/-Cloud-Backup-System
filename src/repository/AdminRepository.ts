@@ -8,6 +8,7 @@ export interface IAdminRepository<FileInstance>
 }
 
 class AdminRepository extends Repository<FileInstance> {
+  //Update Files
   update = async (data: FileInstance, updates: UpdateOptions): Promise<any> => {
     const file = await this.model.update(data, updates);
     return file;
