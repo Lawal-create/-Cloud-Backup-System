@@ -9,6 +9,12 @@ An API that serves as an cloud backup system
    https://documenter.getpostman.com/view/15869686/UVkqrEwW
    ```
 
+## Base Url
+
+   ```
+   https://cloud-based-backup-system.herokuapp.com/api/v1
+   ```
+
 ## Tools/Stack Used
 
 - NodeJs (TypeScript & Express)
