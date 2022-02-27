@@ -1,19 +1,15 @@
 import { FileInstance } from "../models/File";
 import Repository, { IRepository } from "./Repository";
-import { FileQuery } from "../models/File";
+import { UpdateOptions } from "sequelize";
 
 export interface IAdminRepository<FileInstance>
   extends IRepository<FileInstance> {
-  update(data: FileQuery): Promise<any>;
+  update(data: FileInstance, updates: UpdateOptions): Promise<any>;
 }
 
 class AdminRepository extends Repository<FileInstance> {
-  update = async (data: FileQuery): Promise<any> => {
-    const { keys } = data;
-    const file = await this.model.update(
-      { status: "unsafe" },
-      { where: { key: keys as string[] } }
-    );
+  update = async (data: FileInstance, updates: UpdateOptions): Promise<any> => {
+    const file = await this.model.update(data, updates);
     return file;
   };
 }

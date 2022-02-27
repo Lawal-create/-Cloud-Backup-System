@@ -2,6 +2,13 @@
 
 An API that serves as an cloud backup system
 
+
+## Documentation
+
+   ```
+   https://documenter.getpostman.com/view/15869686/UVkqrEwW
+   ```
+
 ## Tools/Stack Used
 
 - NodeJs (TypeScript & Express)
@@ -30,7 +37,6 @@ To run the app locally, follow the steps below:
 
    ```
    cd -Cloud-Backup-System
-
    ```
 
 3. Install the dependencies in the yarn.lock using the command:

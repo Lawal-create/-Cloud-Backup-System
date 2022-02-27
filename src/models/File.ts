@@ -2,17 +2,13 @@ import { Model, DataTypes, Optional } from "sequelize";
 import { sequelize } from "../database/connect";
 import UserModel from "./User";
 
-interface FileAttributes {
+export interface FileAttributes {
   id: number;
   filename: string;
   key: string;
   location: string;
   status: "safe" | "unsafe";
   userId: number;
-}
-
-export interface FileQuery {
-  keys: string[];
 }
 
 export interface FileCreationAttributes

@@ -26,7 +26,9 @@ class AdminService {
     try {
       logger.info(formatLog(req, "Marking Files As Unsafe"));
       const { keys } = req.body;
-      await this.adminRepository.update(keys);
+      await this.adminRepository.update({ status: "unsafe" } as FileInstance, {
+        where: { key: keys as string[] }
+      });
       logger.info(formatLog(req, "Successfully marked files as unsafe "));
       return successResponse(
         res,
@@ -48,6 +50,28 @@ class AdminService {
       const files = await this.fileRepository.findAll();
       logger.info(formatLog(req, "Successfully fetched all files "));
       return successResponse(res, 200, "Successfully fetched all files", files);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  streamMediaFiles = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      logger.info(formatLog(req, "START: Streaming Media Files"));
+      const { filename } = req.query;
+      const streamFile: FileInstance = await this.fileRepository.findOne({
+        where: { filename: String(filename) }
+      });
+      return successResponse(
+        res,
+        206,
+        "Successfully retrieved the streaming link",
+        streamFile.location
+      );
     } catch (err) {
       next(err);
     }
