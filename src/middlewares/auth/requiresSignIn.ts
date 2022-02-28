@@ -12,6 +12,7 @@ const requiresSignIn = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    console.log(1);
     const authHeader: string = req.headers["authorization"] || "";
     if (!authHeader) {
       //continue if participant id is used for auth
@@ -19,15 +20,17 @@ const requiresSignIn = async (
 
       return next(new ApiError(401, "No token provided"));
     }
-
+    console.log(2);
     const token: string = authHeader.replace("Bearer ", "");
 
     //verify JWT
     const decoded: string | JwtPayload = jwt.verify(token, jwtSecret);
+    console.log(3);
     const userId = (decoded as JWTData)._id;
 
     if (!userId) return next(new ApiError(403, "Invalid token provided"));
 
+    console.log(4);
     //save userid in request body for use in routes
     req.body.userId = userId;
 

@@ -23,4 +23,16 @@ fileRoutes.post(
 );
 fileRoutes.get("/download", requiresSignIn, fileService.downloadSingleFile);
 
+fileRoutes.get(
+  "/fetchStreamingLink",
+  requiresSignIn,
+  fileService.streamMediaFiles
+);
+
+fileRoutes.get(
+  "/fetchUploadedFiles",
+  requiresSignIn,
+  fileService.fetchUploadedFiles
+);
+
 export default fileRoutes;

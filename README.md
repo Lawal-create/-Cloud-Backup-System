@@ -31,7 +31,7 @@ An API that serves as an cloud backup system
 - Users can upload files up to 200mb
 - Users can download uploaded files
 - An admin user type for managing the content uploaded
-- Admins can stream vidoes and audios
+- Users can stream videos and audios
 - Admins can mark pictures and videos as unsafe
 - Unsafe files automatically get deleted
 

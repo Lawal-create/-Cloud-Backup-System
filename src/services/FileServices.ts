@@ -106,5 +106,58 @@ class FileService {
       next(err);
     }
   };
+  streamMediaFiles = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      logger.info(formatLog(req, "START: Streaming Media Files"));
+      const userId = Number(res.locals.user.id);
+      const { filename } = req.query;
+      const streamFile: FileInstance = await this.fileRepository.findOne({
+        where: { filename: String(filename) }
+      });
+      if (userId !== streamFile.userId) {
+        return next(
+          ApiError.badRequest("User doesn't have access to this file")
+        );
+      }
+      logger.info(formatLog(req, "END: Successfully Streamed Media Files"));
+      return successResponse(
+        res,
+        206,
+        "Successfully retrieved the streaming link",
+        streamFile.location
+      );
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  fetchUploadedFiles = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      logger.info(formatLog(req, "Fetching Files Uploaded By User"));
+      const userId = Number(res.locals.user.id);
+      const uploadedFiles = await this.fileRepository.findAll({
+        where: { userId: userId }
+      });
+      logger.info(
+        formatLog(req, "Successfully Fetched Files Uploaded By Users")
+      );
+      return successResponse(
+        res,
+        200,
+        "Successfully Fetched Uploaded Files",
+        uploadedFiles
+      );
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 export default FileService;

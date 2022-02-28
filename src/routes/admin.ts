@@ -20,6 +20,4 @@ adminRoutes.put(
 
 adminRoutes.get("/fetchFiles", adminService.fetchAllFiles);
 
-adminRoutes.get("/fetchStreamingLink", adminService.streamMediaFiles);
-
 export default adminRoutes;

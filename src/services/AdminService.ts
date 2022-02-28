@@ -54,28 +54,6 @@ class AdminService {
       next(err);
     }
   };
-
-  streamMediaFiles = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
-    try {
-      logger.info(formatLog(req, "START: Streaming Media Files"));
-      const { filename } = req.query;
-      const streamFile: FileInstance = await this.fileRepository.findOne({
-        where: { filename: String(filename) }
-      });
-      return successResponse(
-        res,
-        206,
-        "Successfully retrieved the streaming link",
-        streamFile.location
-      );
-    } catch (err) {
-      next(err);
-    }
-  };
 }
 
 export default AdminService;
