@@ -64,23 +64,10 @@ All tests for a route or controller should be placed in a `_tests_` folder relat
 
 For example, if you had a `authController.ts` file located in `controllers/auth`, and your tests are in a `authController.test.ts` file, do the following:
 
-1. Create a `_tests_` folder in the `controllers/auth` folder
+1. Create a `_tests_` folder in the `src` folder
 
-2. Move the `authController.test.ts` file to the `_tests_` folder
-
-3. To run test
+2. To run test
 
    ```
    yarn run test
    ```
-
-
-The file structure would look similar to this:
-
-```
-.
-├── controllers
-│   └── auth
-│       ├── authController.ts
-│       └── _tests_
-│           └── authController.test.ts
